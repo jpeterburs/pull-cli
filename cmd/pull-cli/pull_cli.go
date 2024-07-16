@@ -3,10 +3,16 @@ package main
 import (
 	"fmt"
 
-	pull_request "github.com/jpeterburs/pull-cli/internal/pull_request"
+	"github.com/jpeterburs/pull-cli/internal/github"
 )
 
 func main() {
-	var pr pull_request.PullRequest = pull_request.New("jpeterburs", "pull-cli", 1)
+	pr := github.PullRequest{
+		Number: 1,
+		Repository: &github.Repository{
+			Owner: "jpeterburs",
+			Name:  "pull-cli",
+		},
+	}
 	fmt.Println(pr.String())
 }
