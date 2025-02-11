@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/jpeterburs/pull-cli/cmd"
+	"github.com/jpeterburs/pull_request-cli/cmd"
 )
 
 func main() {

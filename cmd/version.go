@@ -12,8 +12,8 @@ func init() {
 
 var versionCmd = &cobra.Command{
 	Use:   "version",
-	Short: "Display the current version of pull-cli",
+	Short: "Display the current version of pull_request-cli",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("pull-cli version 0.1.0")
+		fmt.Println("pull_request-cli version 0.1.0")
 	},
 }

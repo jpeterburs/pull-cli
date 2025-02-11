@@ -1,4 +1,4 @@
-module github.com/jpeterburs/pull-cli
+module github.com/jpeterburs/pull_request-cli
 
 go 1.23.6
 
