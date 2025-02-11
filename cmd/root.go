@@ -7,7 +7,7 @@ import (
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "pull-cli",
+	Use:   "pull-request",
 	Short: "Create GitHub pull request via the command line",
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(args) == 0 {
