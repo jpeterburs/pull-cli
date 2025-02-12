@@ -4,7 +4,25 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
+
+func init() {
+	cobra.OnInitialize(func() {
+		configDir, err := os.UserConfigDir()
+		if err != nil {
+			panic(err)
+		}
+
+		viper.AddConfigPath(configDir + "/pull-request")
+		viper.SetConfigName("config")
+		viper.SetConfigType("yaml")
+
+		if err := viper.ReadInConfig(); err != nil {
+			panic(err)
+		}
+	})
+}
 
 var rootCmd = &cobra.Command{
 	Use:   "pull-request",
