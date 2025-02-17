@@ -22,6 +22,11 @@ var createCmd = &cobra.Command{
 			panic(err)
 		}
 
+		remote, err := gitutil.RemoteOrigin()
+		if err != nil {
+			panic(err)
+		}
+
 		newPR := &github.NewPullRequest{
 			Title: github.Ptr(cmd.Flag("title").Value.String()),
 			Head:  github.Ptr(cmd.Flag("head").Value.String()),
@@ -34,7 +39,7 @@ var createCmd = &cobra.Command{
 		ctx := context.Background()
 		client := github.NewClientWithEnvProxy().WithAuthToken(token)
 
-		pr, _, err := client.PullRequests.Create(ctx, "jpeterburs", "test", newPR)
+		pr, _, err := client.PullRequests.Create(ctx, remote.Owner, remote.Repo, newPR)
 		if err != nil {
 			panic(err)
 		}

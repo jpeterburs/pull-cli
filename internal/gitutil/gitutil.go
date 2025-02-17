@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"regexp"
 	"slices"
 
 	"github.com/go-git/go-git/v5"
@@ -35,6 +36,41 @@ func FindRepo() (*git.Repository, error) {
 
 		return nil, err
 	}
+}
+
+type Remote struct {
+	Owner string
+	Repo  string
+}
+
+func (r *Remote) String() string {
+	return r.Owner + "/" + r.Repo
+}
+
+var ErrInvalidGitURL = errors.New("invalid Git repository URL format")
+
+func RemoteOrigin() (*Remote, error) {
+	repo, err := FindRepo()
+	if err != nil {
+		return nil, err
+	}
+
+	remote, err := repo.Remote("origin")
+	if err != nil {
+		return nil, err
+	}
+
+	re := regexp.MustCompile(`(?:git@|https?:\/\/)([^\/:]+)[\/:](?P<owner>[^\/]+)\/(?P<repo>[^.]+)(?:\.git)?$`)
+	match := re.FindStringSubmatch(remote.Config().URLs[0])
+
+	if len(match) < 4 {
+		return nil, ErrInvalidGitURL
+	}
+
+	return &Remote{
+		Owner: match[2],
+		Repo:  match[3],
+	}, nil
 }
 
 var mainBranches = []string{"main", "trunk", "mainline", "default", "stable", "master"}
