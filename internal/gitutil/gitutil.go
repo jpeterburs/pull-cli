@@ -77,7 +77,7 @@ var mainBranches = []string{"main", "trunk", "mainline", "default", "stable", "m
 
 var ErrNoMainBranch = errors.New("no main branch found, defaulting to master")
 
-func GitMainBranch() (string, error) {
+func MainBranch() (string, error) {
 	repo, err := FindRepo()
 	if err != nil {
 		return "", err

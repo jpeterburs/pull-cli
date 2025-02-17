@@ -49,7 +49,7 @@ var createCmd = &cobra.Command{
 }
 
 func init() {
-	base, err := gitutil.GitMainBranch()
+	base, err := gitutil.MainBranch()
 	if errors.Is(err, gitutil.ErrNoMainBranch) {
 		fmt.Println(err)
 	} else if err != nil {
