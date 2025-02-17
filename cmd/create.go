@@ -67,10 +67,10 @@ func init() {
 	}
 	head := strings.Split(string(ref.Name()), "/")[2]
 
-	createCmd.Flags().String("base", base, "The name of the branch you want the changes pulled into. This should be an existing branch on the current repository. You cannot submit a pull request to one repository that requests a merge to a base of another repository.")
+	createCmd.Flags().String("base", base, "The name of the branch you want the changes pulled into.")
 	createCmd.Flags().StringP("body", "m", "", "The contents of the pull request.")
 	createCmd.Flags().BoolP("draft", "d", false, "Indicates whether the pull request is a draft.")
-	createCmd.Flags().String("head", head, "The name of the branch where your changes are implemented. For cross-repository pull requests in the same network, namespace head with a user like this: username:branch")
+	createCmd.Flags().String("head", head, "The name of the branch where your changes are implemented.")
 	// createCmd.Flags().StringArrayP("lables", "l", []string{}, "apply labels")
 	// createCmd.Flags().StringArrayP("reviewers", "r", []string{}, "request review")
 	createCmd.Flags().StringP("title", "t", "", "The title of the new pull request.")
